@@ -91,16 +91,20 @@ def get_imdbCode(movie):
 
 if __name__=="__main__":
     movie_list = []
+    
+    srt = False
     for file in os.listdir(cur_path):
         if os.path.isfile(os.path.join(cur_path,file)):
             name = file[:file.rindex('.')]
             ext = file[file.rindex('.'):]
             if(ext=='.srt'):
                 print("Already Present will change the name only")
+                srt=True
                 break
             if ext in dic:
                 movie_list.append(name)
     
-    for movie in movie_list:
-        imdb_code = get_imdbCode(movie)
-        add_srt(imdb_code,movie)
+    if(srt==False):
+        for movie in movie_list:
+            imdb_code = get_imdbCode(movie)
+            add_srt(imdb_code,movie)
